@@ -6,13 +6,13 @@ import { wHeight } from "../Constant/general";
 
 const UserProfile = () => {
   const {
-    state: { userProfile, loadGetAllContacts, contactList },
+    state: { userProfile, loadGetAllContacts, contactList , listItemLoading},
   } = React.useContext(ContactContext);
 
   const theme = useTheme();
 
   const contentMemo = React.useMemo(() => {
-    if (loadGetAllContacts) {
+    if (loadGetAllContacts || listItemLoading) {
       return (
         <Box
           sx={{
@@ -132,13 +132,7 @@ const UserProfile = () => {
         </Box>
       );
     }
-  }, [
-    contactList.length,
-    loadGetAllContacts,
-    theme.palette.background.default,
-    theme.palette.background.paper,
-    userProfile,
-  ]);
+  }, [contactList.length, listItemLoading, loadGetAllContacts, theme.palette.background.default, theme.palette.background.paper, userProfile]);
 
   return (
     <Box
