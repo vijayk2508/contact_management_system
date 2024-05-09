@@ -2,7 +2,7 @@ import axios from "axios";
 
 const ServiceAPI = {
   axiosInstance: axios.create({
-    baseURL: "http://localhost:8080",
+    baseURL: "https://contact-management-system-5aky.onrender.com", //"http://localhost:8080",
     timeout: 10000, // Adjust timeout as per your requirement
   }),
 

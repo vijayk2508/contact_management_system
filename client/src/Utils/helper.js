@@ -17,12 +17,14 @@ function successAlert(dispatch, message) {
 }
 
 function errorAlert(dispatch, message) {
+  const isNetworkError = message === "Network Error";
   dispatch({
     type: contactActionConstants.SET_ALERT,
     alert: {
       type: "error",
       message,
     },
+    isNetworkError,
   });
 }
 

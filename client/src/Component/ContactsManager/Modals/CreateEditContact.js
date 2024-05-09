@@ -65,7 +65,7 @@ function CreateEditContact() {
     if (modal?.data) {
       setFormData({
         ...modal?.data,
-        about: modal?.data?.description || "",
+        about: modal?.data?.about || "",
       });
     }
 
@@ -101,15 +101,12 @@ function CreateEditContact() {
     try {
       await validationSchema.validate(formData, { abortEarly: false });
 
-      const { about, ...restFormData } = formData;
-      const objContact = { ...restFormData, description: about };
-
       let res = false;
 
       if (!modal?.data?._id) {
-        res = await createContact(objContact, dispatch);
+        res = await createContact(formData, dispatch);
       } else {
-        const updateContactData = isObjectDirty(objContact, modal?.data);
+        const updateContactData = isObjectDirty(formData, modal?.data);
 
         if (updateContactData) {
           res = await editContact(modal?.data._id, updateContactData, dispatch);
@@ -140,10 +137,8 @@ function CreateEditContact() {
         return true;
       }
     } else {
-      const { about, ...restFormData } = formData;
-      const objContact = { ...restFormData, description: about };
-      const updateContactData = isObjectDirty(objContact, modal?.data);
-
+      const updateContactData = isObjectDirty(formData, modal?.data);
+      
       if (!updateContactData) return true;
       else return false;
     }

@@ -33,7 +33,8 @@ const initialState = {
   listItemLoading: false,
   totalSize: 0,
   onSearch: false,
-  searchTerm:"",
+  searchTerm: "",
+  isNetworkError: false,
   ...modal,
 };
 
@@ -73,8 +74,16 @@ const contactReducer = (state, action) => {
     case OPEN_MODAL:
       return { ...state, modal: { ...state.modal, ...action.modal } };
 
-    case SET_ALERT:
-      return { ...state, alerts: [...state.alerts, action.alert] };
+    case SET_ALERT: {
+      let updatedState = { ...state, alerts: [...state.alerts, action.alert] };
+
+      if (action?.isNetworkError) {
+        updatedState["loadGetAllContacts"] = false;
+        updatedState["isNetworkError"] = true;
+      }
+
+      return updatedState;
+    }
 
     case REMOVE_ALERT:
       const index = action.alert_idx;
@@ -97,7 +106,7 @@ const contactReducer = (state, action) => {
         userProfile: action?.contacts?.[0] ?? null,
         contactList: action?.contacts || [],
         onSearch: action?.onSearch || true,
-        searchTerm : action?.searchTerm || ""
+        searchTerm: action?.searchTerm || "",
       };
     case SET_LOADING:
       return {

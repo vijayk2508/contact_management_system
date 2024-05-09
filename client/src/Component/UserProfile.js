@@ -106,7 +106,7 @@ const UserProfile = () => {
                 height: "calc(100vh - 630px) !important",
               }}
             >
-              {userProfile?.description.substring(0, 370) || "N.A"}
+              {userProfile?.about.substring(0, 370) || "N.A"}
             </Typography>
           </Box>
         </React.Fragment>

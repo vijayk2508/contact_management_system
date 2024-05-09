@@ -7,7 +7,6 @@ import {
   Container,
   Grid,
   Box,
-  CircularProgress,
 } from "@mui/material";
 import { Add as AddIcon } from "@mui/icons-material";
 import ContactList from "../Component/ContactsManager/ContactList";
@@ -18,12 +17,13 @@ import { contactActionConstants } from "../Context/reducer/contactConstant";
 import { modalTypes, wHeight } from "../Constant/general";
 import CommonModal from "../Component/ContactsManager/Modals";
 import { closeSnackbar, useSnackbar } from "notistack";
+import Loader from "../Component/Loader";
 
 const ContactsManager = () => {
   const alertRefs = useRef([]);
   const { enqueueSnackbar } = useSnackbar();
   const { state, dispatch } = React.useContext(ContactContext);
-  const { alerts, contactList } = state;
+  const { alerts, contactList, isNetworkError } = state;
 
   const closeAlert = useCallback(
     (index) => {
@@ -78,24 +78,6 @@ const ContactsManager = () => {
   }, [dispatch]);
 
   const content = useMemo(() => {
-    if (state?.loadGetAllContacts) {
-      return (
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            maxHeight: wHeight,
-            minHeight: wHeight,
-            justifyContent: "center",
-            margin: "0px 60px",
-          }}
-        >
-          <CircularProgress />
-        </Box>
-      );
-    }
-
     if (contactList?.length > 0 || state?.onSearch === true) {
       return (
         <>
@@ -148,12 +130,7 @@ const ContactsManager = () => {
         </Button>
       );
     }
-  }, [
-    addCreateContact,
-    contactList?.length,
-    state?.loadGetAllContacts,
-    state?.onSearch,
-  ]);
+  }, [addCreateContact, contactList?.length, state?.onSearch]);
 
   return useMemo(() => {
     const containerStyle =
@@ -166,25 +143,49 @@ const ContactsManager = () => {
           }
         : {};
 
+    if (state?.loadGetAllContacts) {
+      return <Loader />;
+    }
+
     return (
       <div>
-        <AppBar position="static">
-          <Toolbar>
-            <Typography variant="h6" sx={{ flexGrow: 1 }}>
-              Contact List
+        {isNetworkError ? (
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              maxHeight: wHeight,
+              minHeight: wHeight,
+              justifyContent: "center",
+              margin: "0px 60px",
+            }}
+          >
+            <Typography variant="h5" gutterBottom textTransform={"capitalize"}>
+              OOPs, There is some problem occured. Please try after sometime.
             </Typography>
-          </Toolbar>
-        </AppBar>
-        <Container
-          sx={{ paddingTop: "20px", ...containerStyle }}
-          maxWidth="900"
-        >
-          {content}
-        </Container>
-        <CommonModal />
+          </Box>
+        ) : (
+          <>
+            <AppBar position="static">
+              <Toolbar>
+                <Typography variant="h6" sx={{ flexGrow: 1 }}>
+                  Contact List
+                </Typography>
+              </Toolbar>
+            </AppBar>
+            <Container
+              sx={{ paddingTop: "20px", ...containerStyle }}
+              maxWidth="900"
+            >
+              {content}
+            </Container>
+            <CommonModal />
+          </>
+        )}
       </div>
     );
-  }, [contactList?.length, content]);
+  }, [contactList?.length, content, isNetworkError, state?.loadGetAllContacts]);
 };
 
 export default ContactsManager;

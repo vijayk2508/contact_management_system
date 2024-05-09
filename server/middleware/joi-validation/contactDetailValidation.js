@@ -7,7 +7,7 @@ const createContactDetailValidation = (req, res, next) => {
     email: commonJoiParams.email.required(),
     phone_number: commonJoiParams.phone_number.required(),
     phone_number_prefix: commonJoiParams.phone_number_prefix.required(),
-    description: commonJoiParams.description.required(),
+    about: commonJoiParams.about.required(),
     address: commonJoiParams.address.required(),
   });
   const { error } = schema.validate(req.body);

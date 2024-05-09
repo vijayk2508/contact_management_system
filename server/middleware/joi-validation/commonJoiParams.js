@@ -31,7 +31,7 @@ const commonJoiParams = {
   phone_number,
   phone_number_prefix,
   imageURL: SanitizedJoiString,
-  description: SanitizedJoiString.max(370).min(100).messages({
+  about: SanitizedJoiString.max(370).min(100).messages({
     "string.min": "About must be at least 100 characters long",
     "string.max": "About cannot exceed 370 characters",
     "any.required": "About is required",

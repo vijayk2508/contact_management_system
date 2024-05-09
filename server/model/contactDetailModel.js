@@ -44,7 +44,7 @@ const contactDetailSchema = new mongoose.Schema({
     type: String,
     default: "",
   },
-  description: {
+  about: {
     type: String,
     default: "",
   },
