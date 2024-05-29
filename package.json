@@ -1,0 +1,25 @@
+{
+  "name": "contact_management_system",
+  "version": "1.0.0",
+  "description": "Live URL - https://contact-management-system-lake.vercel.app/",
+  "main": "index.js",
+  "scripts": {
+    "start:client": "cd client && npm start",
+    "start:server": "cd server && npm start",
+    "start": "concurrently \"npm run start:client\" \"npm run start:server\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vijayk2508/contact_management_system.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vijayk2508/contact_management_system/issues"
+  },
+  "homepage": "https://github.com/vijayk2508/contact_management_system#readme",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

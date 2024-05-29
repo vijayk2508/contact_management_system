@@ -11,7 +11,7 @@ const ContactProvider = ({ children }) => {
   useEffect(() => {
     if (onMountRef.current === 0) {
       onMountRef.current = 1;
-      getAllContacts({ dispatch });
+      //getAllContacts({ dispatch });
     }
   }, []);
 
