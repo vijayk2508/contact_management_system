@@ -8,8 +8,8 @@ const App = () => {
   return (
     <ContactProvider>
       <SnackbarProvider>
-        {/* <ContactsManager /> */}
-        <EdenFaceComponent />
+        <ContactsManager />
+        {/* <EdenFaceComponent /> */}
       </SnackbarProvider>
     </ContactProvider>
   );

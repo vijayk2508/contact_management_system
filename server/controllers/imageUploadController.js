@@ -46,7 +46,7 @@ const uploadImages = async (req, res) => {
     };
   }
 
-  const uploadFolder = path.join(__dirname, "uploads", Date.now().toString());
+  const uploadFolder = path.join("./", "uploads", Date.now().toString());
   fs.mkdir(uploadFolder, { recursive: true });
 
   const imageUrls = [];
@@ -60,7 +60,7 @@ const uploadImages = async (req, res) => {
         const imagePath = path.join(uploadFolder, `image_${index + 1}.png`);
         await fs.writeFile(imagePath, base64Image, { encoding: "base64" }); // Use fs.promises.writeFile and await its completion
         console.log("File created");
-        const imageUrl = `${baseURL}/${path.relative(__dirname, imagePath)}`;
+        const imageUrl = `${baseURL}/${path.relative("./", imagePath)}`;
 
         imageUrls.push(imageUrl.replace(/\\/g, "/"));
       })
