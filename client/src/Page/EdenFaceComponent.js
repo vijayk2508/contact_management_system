@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { face_comparison } from "../Services/edenServiceAPI";
 
 const images = [
-  "https://edenai.s3.eu-west-1.amazonaws.com/aman-gupta.jpg",
-  "https://edenai.s3.eu-west-1.amazonaws.com/new.jpg",
-  "https://edenai.s3.eu-west-1.amazonaws.com/test1.jpg",
-  "https://edenai.s3.eu-west-1.amazonaws.com/test2.jpg",
+  "https://contact-management-system-lake.vercel.app/images/aman-gupta.jpg",
+  "https://contact-management-system-lake.vercel.app/images/new.jpg",
+  "https://contact-management-system-lake.vercel.app/images/test1.jpg",
+  "https://contact-management-system-lake.vercel.app/images/test2.jpg",
 ];
 
 const EdenFaceComponent = () => {
