@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 
 const dbConfig = {
   username: "admin",
-  password: "PG49jzNIqyHR9HYj",
+  password: "admin",
   host: "cluster0.09ahukh.mongodb.net",
   db: "contactmanagementsystem",
   authSource: "admin",
